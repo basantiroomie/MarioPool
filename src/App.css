@@ -1,44 +1,123 @@
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background-color: #f4f4f4; /* Keeping the background color as is */
 }
 
 header {
-  background-color: #4CAF50;
-  color: white;
-  padding: 1rem;
-  text-align: center;
+  background: #852B56; /* Updated header color */
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo {
+  font-size: 1.5em; /* Logo size */
 }
 
 .navbar ul {
   list-style: none;
-  display: flex;
-  justify-content: center;
+  padding: 0; /* Ensure padding is reset */
 }
 
 .navbar ul li {
-  margin-right: 20px;
+  display: inline; /* Inline display for navbar items */
+  margin: 0 15px; /* Adjusted margin */
 }
 
 .navbar ul li a {
-  color: white;
+  color: #fff; /* Updated link color */
   text-decoration: none;
+  font-weight: bold; /* Made link text bold */
 }
 
+.navbar ul li a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Hero Section */
 .hero {
+  background: #758173; /* Blue */
+  color: #fff;
+  padding: 50px 20px;
   text-align: center;
-  padding: 50px;
-  background-color: #f4f4f4;
 }
 
-.features {
-  display: flex;
-  justify-content: space-around;
+.hero h1 {
+  margin: 0; /* Removed margin for consistency */
+}
+
+/* Features Overview */
+.feature-grid {
+  display: flex; /* Use Flexbox to arrange items in a row */
+  justify-content: space-around; /* Space items evenly */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 20px; /* Space between items */
+}
+
+.feature {
+  text-align: center; /* Center text in each feature */
+  padding: 20px; /* Space inside each feature box */
+  border: 1px solid #edecec; /* Border around each feature */
+  border-radius: 5px; /* Rounded corners */
+  flex: 1; /* Allow items to grow */
+  min-width: 200px; /* Minimum width for items */
+}
+
+/* Testimonials Section */
+.testimonials {
+  background: #f9f9f9; /* Keeping existing background color */
   padding: 20px;
+  margin: 20px 0;
 }
 
-footer {
-  background-color: #333;
-  color: white;
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input {
+  margin: 10px 0;
   padding: 10px;
+  border: 1px solid #f2f0f0; /* Keeping the existing border */
+  border-radius: 5px;
+}
+
+form button {
+  padding: 10px;
+  background: #758173; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #656d64; /* Darker shade for hover effect */
+}
+
+/* Footer */
+footer {
   text-align: center;
+  padding: 20px;
+  background: #758173; /* Matching footer color */
+  color: white;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+  .feature-grid {
+      flex-direction: row; /* Stack items vertically on small screens */
+      align-items: center; /* Center items */
+  }
+
+  .feature {
+      width: 100%; /* Make items full width on small screens */
+  }
 }

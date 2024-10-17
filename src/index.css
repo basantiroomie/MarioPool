@@ -1,9 +1,205 @@
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  line-height: 1.6;
+  background-color: #f4f4f4;
 }
 
-h1, h2, h3 {
-  margin: 0.5rem 0;
+/* Header Styles */
+.header {
+  background-color: #7B2049;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo h1 {
+  margin: 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section Styles */
+.hero {
+  background-color: #8B8B73;
+  text-align: center;
+  padding: 50px;
+}
+
+.hero h1 {
+  color: white;
+  margin: 0;
+}
+
+.hero h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.cta-buttons .btn {
+  background-color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+.cta-buttons .btn:hover {
+  background-color: #ddd;
+}
+
+/* Features Section Styles */
+.features {
+  text-align: center;
+  padding: 50px;
+}
+
+.features-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap; /* Support for smaller screens */
+}
+
+.feature {
+  width: 250px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px; /* Margin to prevent overlap on smaller screens */
+}
+
+.feature img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.feature h3 {
+  margin: 10px 0;
+}
+
+.feature p {
+  color: #555;
+}
+
+/* Testimonials Section */
+.testimonials {
+  background: #f9f9f9;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input,
+form select {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #f2f0f0;
+  border-radius: 5px;
+}
+
+form button {
+  padding: 10px;
+  background: #758173;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #647361; /* Darker Green */
+}
+/* Footer Styles */
+.footer {
+  background-color: #979797 !important; /* New background color */
+  color: #FFFFFF !important; /* Text color */
+  padding: 20px;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 1.1em;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between links */
+}
+
+.footer ul li a {
+  color: #FFCC00; /* Link color */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.footer ul li a:hover {
+  color: #FFFFFF; /* Hover effect */
+  text-decoration: underline;
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #ffffff;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+  .features-container {
+      flex-direction: row ; /* Stack features vertically on small screens */
+      align-items: center;
+  }
+
+  .feature {
+      width: 100%; /* Full width for smaller screens */
+  }
+
+  .footer {
+      padding: 30px 10px; /* Adjust padding for mobile screens */
+  }
+
+  .footer ul {
+      display: flex; /* Keep the list items in a row */
+      justify-content: center; /* Center the list items */
+      flex-wrap: wrap; /* Allow wrapping if there are too many links */
+  }
+
+  .footer ul li {
+      display: inline-block; /* Keep items inline */
+      margin: 5px 10px; /* Adjust margins for small screens */
+  }
 }
