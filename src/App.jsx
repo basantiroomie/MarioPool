@@ -6,6 +6,9 @@ import StartCarpooling from './pages/StartCarpooling'; // Import Start Carpoolin
 import Layout from './components/Layout'; // Import the Layout component
 import RegisterLogin from './pages/RegisterLogin'; // Import the Layout component
 import Login from './pages/Login'; 
+import ChatBot from './components/Mariobot.jsx'; // Adjust the path as necessary
+import About from './pages/About'; 
+
 
 function App() {
   return (
@@ -17,8 +20,10 @@ function App() {
           <Route path="/startcarpooling" element={<StartCarpooling />} />
           <Route path="/RegisterLogin" element={<RegisterLogin />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/About" element={<About />} /> 
         </Route>
       </Routes>
+      <ChatBot /> {/* Make sure this is included */}
     </Router>
   );
 }

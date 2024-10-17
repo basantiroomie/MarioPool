@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
   line-height: 1.6;
@@ -9,7 +9,7 @@ body {
 
 /* Header Styles */
 .header {
-  background-color: #7B2049;
+  background-color: #1C0221;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -32,7 +32,7 @@ body {
 }
 
 .nav-links a {
-  color: white;
+  color: rgb(130, 174, 54);
   text-decoration: none;
 }
 
@@ -42,7 +42,7 @@ body {
 
 /* Hero Section Styles */
 .hero {
-  background-color: #8B8B73;
+  background-color: #93ba30;
   text-align: center;
   padding: 50px;
 }
@@ -72,52 +72,99 @@ body {
 }
 
 /* Features Section Styles */
-.features {
-  text-align: center;
-  padding: 50px;
-}
-
-.features-container {
-  display: flex;
-  justify-content: space-around;
-  gap: 20px;
-  flex-wrap: wrap; /* Support for smaller screens */
+.feature-grid {
+  display: flex; /* Use Flexbox to arrange items in a row */
+  justify-content: center; /* Align items to the start */
+  align-items: center; /* Center items vertically */
+  flex-wrap: nowrap; /* Prevent wrapping */
+  gap: 20px; /* Space between items */
+  padding: 20px; /* Padding around the grid */
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
 }
 
 .feature {
-  width: 250px;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 10px; /* Margin to prevent overlap on smaller screens */
+  text-align: center; /* Center text in each feature */
+  padding: 20px; /* Space inside each feature box */
+  border: 1px solid #edecec; /* Border around each feature */
+  border-radius: 5px; /* Rounded corners */
+  flex: 0 0 auto; /* Prevent items from growing and set their width automatically */
+  min-width: 200px; /* Minimum width for items */
+  margin: 10px; /* Add some spacing between items */
 }
 
 .feature img {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 20px;
-}
-
-.feature h3 {
-  margin: 10px 0;
-}
-
-.feature p {
-  color: #555;
+  width: 280px; /* Set a specific width for images (adjust as needed) */
+  height: 180px; /* Set a specific height for images (adjust as needed) */
+  object-fit: fill; /* Ensure the image covers the specified width and height */
+  margin-bottom: 10px; /* Spacing below the image */
 }
 
 /* Testimonials Section */
 .testimonials {
-  background: #f9f9f9;
-  padding: 20px;
-  margin: 20px 0;
+  background-color: #e8f0d7;
+  padding: 15px; /* Slightly reduced padding */
+  margin: 30px auto;
+  max-width: 500px; /* Adjusted max-width */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
+.testimonials h2 {
+  font-size: 20px; /* Reduced font size */
+  color: #1C0221;
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+.testimonials blockquote {
+  font-style: italic;
+  background: #ffffff;
+  padding: 8px; /* Further reduced padding */
+  margin: 10px auto; /* Adjusted margin */
+  border-left: 4px solid #93ba30; /* Slightly reduced border width */
+  border-radius: 5px;
+  position: relative;
+  max-width: 350px; /* Further reduced width */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Reduced shadow size */
+}
+
+.testimonials blockquote:before {
+  content: open-quote;
+  font-size: 24px; /* Reduced font size for quotes */
+  color: #93ba30;
+  position: absolute;
+  left: 8px; /* Adjusted position */
+  top: 3px; /* Adjusted position */
+}
+
+.testimonials blockquote:after {
+  content: close-quote;
+  font-size: 24px; /* Reduced font size for quotes */
+  color: #93ba30;
+  position: absolute;
+  right: 8px; /* Adjusted position */
+  bottom: 3px; /* Adjusted position */
+}
+
+.testimonials cite {
+  display: block;
+  margin-top: 5px; /* Reduced margin */
+  font-size: 14px; /* Reduced font size */
+  color: #6C757D;
+}
+
+
 /* Form Styles */
+h2 {
+  width: calc(100% - 10cm); /* Ensures 5cm gap on both sides */
+  margin: 50px auto; /* Center the heading */
+  text-align: center; /* Optional: to align the text in the center */
+}
 form {
   display: flex;
   flex-direction: column;
+  width: calc(100% - 10cm); /* Ensures 5cm gap on both sides */
+  margin: 0 auto; /* Center the form */
 }
 
 form input,
@@ -130,7 +177,7 @@ form select {
 
 form button {
   padding: 10px;
-  background: #758173;
+  background: #1C0221;
   color: white;
   border: none;
   border-radius: 5px;
@@ -140,9 +187,10 @@ form button {
 form button:hover {
   background: #647361; /* Darker Green */
 }
+
 /* Footer Styles */
 .footer {
-  background-color: #979797 !important; /* New background color */
+  background-color: #1C0221 !important; /* New background color */
   color: #FFFFFF !important; /* Text color */
   padding: 20px;
   text-align: center;
@@ -159,7 +207,7 @@ form button:hover {
 }
 
 .footer ul li a {
-  color: #FFCC00; /* Link color */
+  color: #93ba30; /* Link color */
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
@@ -180,13 +228,22 @@ form button:hover {
 /* Media Queries */
 @media (max-width: 600px) {
   .features-container {
+      display: flex;
       flex-direction: row ; /* Stack features vertically on small screens */
       align-items: center;
   }
 
   .feature {
-      width: 100%; /* Full width for smaller screens */
-  }
+    width: 90%; /* Use most of the width but leave some margin */
+    margin: 10px 0; /* Add vertical spacing between features */
+}
+
+.feature img {
+    width: 100%; /* Make images responsive */
+    max-width: 700px; /* Limit the maximum width to prevent them from being too large */
+    height: auto; /* Maintain aspect ratio */
+}
+}
 
   .footer {
       padding: 30px 10px; /* Adjust padding for mobile screens */
@@ -202,4 +259,115 @@ form button:hover {
       display: inline-block; /* Keep items inline */
       margin: 5px 10px; /* Adjust margins for small screens */
   }
-}
+
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* Changed to white for a cleaner look */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  }
+  
+  .about-section h1, 
+  .carpooling-section h2, 
+  .eco-friendly-section h2, 
+  .corporate-assistance-section h2, 
+  .team-section h2 {
+    color: #2A4D69; /* Darker blue for headings */
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif; /* Modern font style */
+    font-weight: bold; /* Bold headings */
+  }
+  
+  .about-section p,
+  .carpooling-section p, 
+  .eco-friendly-section p, 
+  .corporate-assistance-section p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333333; /* Darker gray for better readability */
+    margin-bottom: 30px;
+    text-align: justify; /* Justified text for a cleaner look */
+  }
+  
+  .team-section {
+    margin-top: 40px;
+  }
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 20px;
+  }
+  
+  .team-member {
+    text-align: center;
+    padding: 20px; /* Padding for spacing inside team member box */
+    border: 1px solid #d1d1d1; /* Light border around team members */
+    border-radius: 8px; /* Rounded corners for team member boxes */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+    background-color: #F1F1F1; /* Light gray background for team members */
+  }
+  
+  .team-member:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+  }
+  
+  .team-member h3 {
+    font-size: 20px;
+    color: #2A4D69; /* Darker blue for member names */
+    margin: 10px 0; /* Margin for spacing */
+  }
+  
+  .team-member p {
+    font-size: 16px;
+    color: #555555; /* Medium gray for better contrast */
+  }
+  
+
+  .login-container {
+    text-align: center; /* Center text alignment */
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center form elements */
+    margin-bottom: 20px; /* Space below the form */
+  }
+  
+  .login-form input {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #f2f0f0;
+    border-radius: 5px;
+    width: 80%; /* Adjust width to your liking */
+  }
+  
+  .login-form button {
+    padding: 10px;
+    background: #1C0221;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-form button:hover {
+    background: #647361; /* Darker Green */
+  }
+  
+  .forgot-password {
+    display: inline-block; /* Treat link like a block element */
+    margin-top: 10px; /* Space above link */
+    color: #1C0221; /* Match link color */
+    text-decoration: none; /* Remove underline */
+  }
+  
+  .forgot-password:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: #647361; /* Change color on hover */
+  }

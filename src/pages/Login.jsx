@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,7 +12,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
       <form className="login-form" onSubmit={handleSubmit}>
         <input
@@ -31,9 +31,10 @@ const Login = () => {
         />
         <button type="submit">Login</button>
       </form>
-      <a href="#reset-password">Forgot password?</a>
+      <a href="#reset-password" className="forgot-password">Forgot password?</a>
     </div>
   );
 };
+
 
 export default Login;
