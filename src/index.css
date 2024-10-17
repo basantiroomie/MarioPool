@@ -102,54 +102,54 @@ body {
 /* Testimonials Section */
 .testimonials {
   background-color: #e8f0d7;
-  padding: 15px; /* Slightly reduced padding */
+  padding: 15px; /* Reduced padding to decrease height */
   margin: 30px auto;
-  max-width: 500px; /* Adjusted max-width */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px; /* Increased max-width for more width */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .testimonials h2 {
-  font-size: 20px; /* Reduced font size */
+  font-size: 24px;
   color: #1C0221;
-  margin-bottom: 15px; /* Reduced margin */
+  margin-bottom: 15px;
 }
 
 .testimonials blockquote {
   font-style: italic;
   background: #ffffff;
-  padding: 8px; /* Further reduced padding */
-  margin: 10px auto; /* Adjusted margin */
-  border-left: 4px solid #93ba30; /* Slightly reduced border width */
-  border-radius: 5px;
+  padding: 10px; /* Slightly reduced padding for decreased height */
+  margin: 12px auto; /* Adjusted margin */
+  border-left: 5px solid #93ba30;
+  border-radius: 8px;
   position: relative;
-  max-width: 350px; /* Further reduced width */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Reduced shadow size */
+  max-width: 700px; /* Increased width */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .testimonials blockquote:before {
   content: open-quote;
-  font-size: 24px; /* Reduced font size for quotes */
+  font-size: 28px;
   color: #93ba30;
   position: absolute;
-  left: 8px; /* Adjusted position */
-  top: 3px; /* Adjusted position */
+  left: 10px;
+  top: 5px;
 }
 
 .testimonials blockquote:after {
   content: close-quote;
-  font-size: 24px; /* Reduced font size for quotes */
+  font-size: 28px;
   color: #93ba30;
   position: absolute;
-  right: 8px; /* Adjusted position */
-  bottom: 3px; /* Adjusted position */
+  right: 10px;
+  bottom: 5px;
 }
 
 .testimonials cite {
   display: block;
-  margin-top: 5px; /* Reduced margin */
-  font-size: 14px; /* Reduced font size */
+  margin-top: 10px;
+  font-size: 16px;
   color: #6C757D;
 }
 
