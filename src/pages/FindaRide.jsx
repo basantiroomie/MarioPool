@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MapComponent, { nearbyFriendCoordinates, destinationCoordinate, sourceCoordinate } from '../components/MapComponent'; // Import the map component and coordinates
+import axios from 'axios'; // Import axios for API requests
 
 const FindaRide = () => {
   // Transform nearbyFriendCoordinates into objects with lat/lon, age, and gender for display purposes
@@ -13,11 +14,32 @@ const FindaRide = () => {
 
   // State for the selected friend
   const [selectedFriend, setSelectedFriend] = useState(null);
+  
+  // State for distance and time
+  const [distanceAndTime, setDistanceAndTime] = useState({ distance: '', duration: '' });
 
   // Handle friend selection from the dropdown
-  const handleSelectFriend = (event) => {
+  const handleSelectFriend = async (event) => {
     const friendIndex = event.target.value;
-    setSelectedFriend(nearbyFriends[friendIndex]);
+    const selected = nearbyFriends[friendIndex];
+    setSelectedFriend(selected);
+
+    // Call the Google Distance Matrix API to calculate the distance and time
+    const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY'; // Replace with your Google Maps API key
+    const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${sourceCoordinate[1]},${sourceCoordinate[0]}&destinations=${selected.lat},${selected.lon}&key=${apiKey}`;
+    
+    try {
+      const response = await axios.get(url);
+      const data = response.data.rows[0].elements[0];
+      
+      // Update state with distance and duration
+      setDistanceAndTime({
+        distance: data.distance.text,
+        duration: data.duration.text
+      });
+    } catch (error) {
+      console.error('Error fetching distance matrix:', error);
+    }
   };
 
   // Handle "Call" button click
@@ -88,11 +110,16 @@ const FindaRide = () => {
         </select>
       </div>
 
-      {/* Show Call and View in Maps buttons if a friend is selected */}
+      {/* Show Call, View in Maps buttons, and distance/time if a friend is selected */}
       {selectedFriend && (
         <div style={{ marginTop: '20px' }}>
           <button onClick={handleCall}>Call {selectedFriend.name}</button>
           <button onClick={handleViewInMaps} style={{ marginLeft: '10px' }}>Open in Google Maps</button>
+          <div style={{ marginTop: '10px' }}>
+            <h4>Distance and Time</h4>
+            <p>Distance: {distanceAndTime.distance}</p>
+            <p>Estimated time: {distanceAndTime.duration}</p>
+          </div>
         </div>
       )}
     </div>
@@ -100,3 +127,4 @@ const FindaRide = () => {
 };
 
 export default FindaRide;
+
