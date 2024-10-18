@@ -1,37 +1,36 @@
 import React, { useEffect, useRef, useState } from 'react';
 import 'ol/ol.css'; // Import OpenLayers CSS
+import '../index.css'; // Import the global CSS that now contains styles for the map
+
 import Map from 'ol/Map';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import View from 'ol/View';
 import Overlay from 'ol/Overlay';
-import { fromLonLat } from 'ol/proj'; // Import fromLonLat for coordinate transformation
-import { LineString } from 'ol/geom'; // Import LineString for drawing the route
-import { Vector as VectorLayer } from 'ol/layer'; // Import for vector layers
-import { Vector as VectorSource } from 'ol/source'; // Import for vector sources
-import { Stroke, Style } from 'ol/style'; // For styling the route line
+import { fromLonLat } from 'ol/proj';
+import { LineString } from 'ol/geom';
+import { Vector as VectorLayer } from 'ol/layer';
+import { Vector as VectorSource } from 'ol/source';
+import { Stroke, Style } from 'ol/style';
 
-// Exporting the coordinates so they can be used in other components
-export const sourceCoordinate = [77.6200, 12.9719]; // MG Road 
+export const sourceCoordinate = [77.6200, 12.9719];
 export const nearbyFriendCoordinates = [
-  { coords: [77.6300, 12.9740], name: 'Friend 1', age: '23', gender: 'female' }, // Friend 1
-  { coords: [77.6350, 12.9725], name: 'Friend 2', age: '25', gender: 'female' }, // Friend 2
-  { coords: [77.6380, 12.9730], name: 'Friend 3', age: '20', gender: 'male' }, // Friend 3
+  { coords: [77.6300, 12.9740], name: 'Friend 1', age: '23', gender: 'female' },
+  { coords: [77.6350, 12.9725], name: 'Friend 2', age: '25', gender: 'female' },
+  { coords: [77.6380, 12.9730], name: 'Friend 3', age: '20', gender: 'male' },
 ];
-export const destinationCoordinate = [77.6836, 12.8391]; // Ensure this is accurate
+export const destinationCoordinate = [77.6836, 12.8391];
 
 const MapComponent = () => {
   const mapElement = useRef(null);
-  const popupRef = useRef(null); // Reference for the popup overlay
-  const [popupContent, setPopupContent] = useState(''); // State to manage the popup content
-  const [routeLayer, setRouteLayer] = useState(null); // State to store the route layer
+  const popupRef = useRef(null);
+  const [popupContent, setPopupContent] = useState('');
+  const [routeLayer, setRouteLayer] = useState(null);
 
-  // Refs for source, friends, and destination marker elements
   const sourceMarkerRef = useRef(null);
   const nearbyFriendMarkerRefs = useRef(nearbyFriendCoordinates.map(() => React.createRef()));
-  const destinationMarkerRef = useRef(null); // Ensure this reference is properly attached
+  const destinationMarkerRef = useRef(null);
 
-  // Function to fetch the route from OSRM
   const getRoute = async (coordinates) => {
     const coordsString = coordinates.map(coord => coord.join(',')).join(';');
     const osrmApiUrl = `http://router.project-osrm.org/route/v1/driving/${coordsString}?overview=full&geometries=geojson`;
@@ -49,47 +48,41 @@ const MapComponent = () => {
   };
 
   useEffect(() => {
-    // Initialize the map
     const map = new Map({
       target: mapElement.current,
       layers: [
         new TileLayer({
-          source: new OSM(), // OpenStreetMap source
+          source: new OSM(),
         }),
       ],
       view: new View({
-        center: fromLonLat(sourceCoordinate), // Center the map at the source
-        zoom: 14, // Initial zoom level
+        center: fromLonLat(sourceCoordinate),
+        zoom: 14,
       }),
     });
 
-    // Create the popup overlay
     const popupOverlay = new Overlay({
       element: popupRef.current,
       positioning: 'top-center',
       stopEvent: false,
-      offset: [20, -20], // Position the popup slightly above the marker
+      offset: [20, -20],
     });
     map.addOverlay(popupOverlay);
 
-    // Function to show popup with friend details (name, age, and gender)
     const showPopup = (friend, position) => {
       const content = `
         <strong>${friend.name}</strong><br />
         <strong>Age:</strong> ${friend.age}<br />
         <strong>Gender:</strong> ${friend.gender}`;
-      
-      setPopupContent(content); // Set the popup content as HTML string
-      popupOverlay.setPosition(fromLonLat(position)); // Set popup position
-      popupRef.current.style.display = 'block'; // Show the popup
+      setPopupContent(content);
+      popupOverlay.setPosition(fromLonLat(position));
+      popupRef.current.style.display = 'block';
     };
 
-    // Function to hide popup
     const hidePopup = () => {
-      popupRef.current.style.display = 'none'; // Hide the popup
+      popupRef.current.style.display = 'none';
     };
 
-    // Add the source marker
     const sourceOverlay = new Overlay({
       position: fromLonLat(sourceCoordinate),
       positioning: 'center-center',
@@ -97,7 +90,6 @@ const MapComponent = () => {
     });
     map.addOverlay(sourceOverlay);
 
-    // Add nearby friend markers
     nearbyFriendCoordinates.forEach((friend, index) => {
       const overlay = new Overlay({
         position: fromLonLat(friend.coords),
@@ -106,28 +98,24 @@ const MapComponent = () => {
       });
       map.addOverlay(overlay);
 
-      // Add hover event listener for each friend marker
       nearbyFriendMarkerRefs.current[index].current.addEventListener('mouseenter', () => {
-        showPopup(friend, friend.coords); // Pass the entire friend object
+        showPopup(friend, friend.coords);
       });
       nearbyFriendMarkerRefs.current[index].current.addEventListener('mouseleave', hidePopup);
     });
 
-    // Add the destination marker
     const destinationOverlay = new Overlay({
       position: fromLonLat(destinationCoordinate),
       positioning: 'center-center',
-      element: destinationMarkerRef.current, // Ensure the element is correct
+      element: destinationMarkerRef.current,
     });
     map.addOverlay(destinationOverlay);
 
-    // Add hover event listener for the destination marker
     destinationMarkerRef.current.addEventListener('mouseenter', () => {
       showPopup({ name: 'Destination', age: 'N/A', gender: 'N/A' }, destinationCoordinate);
     });
     destinationMarkerRef.current.addEventListener('mouseleave', hidePopup);
 
-    // Coordinates combinations to show different routes
     const routeCombinations = [
       [sourceCoordinate, nearbyFriendCoordinates[0].coords, destinationCoordinate],
       [sourceCoordinate, nearbyFriendCoordinates[1].coords, destinationCoordinate],
@@ -137,110 +125,65 @@ const MapComponent = () => {
     let currentRouteIndex = 0;
 
     const cycleRoutes = () => {
-      // Clear the previous route layer if it exists
       if (routeLayer) {
         map.removeLayer(routeLayer);
       }
 
-      // Fetch and display the next route
       const coordinates = routeCombinations[currentRouteIndex];
 
       getRoute(coordinates).then((route) => {
         if (route.length > 0) {
-          const routeLine = new LineString(route); // Create the line geometry from route coordinates
+          const routeLine = new LineString(route);
           const newRouteLayer = new VectorLayer({
             source: new VectorSource({
-              features: [routeLine], // Add the route line as a feature
+              features: [routeLine],
             }),
             style: new Style({
               stroke: new Stroke({
-                color: '#FF0000', // Red color for the route
-                width: 3, // Line width
+                color: '#FF0000',
+                width: 3,
               }),
             }),
           });
-          map.addLayer(newRouteLayer); // Add the route layer to the map
-          setRouteLayer(newRouteLayer); // Update the state to store the current route layer
+          map.addLayer(newRouteLayer);
+          setRouteLayer(newRouteLayer);
         }
       });
 
-      // Update the route index to cycle through the routes
       currentRouteIndex = (currentRouteIndex + 1) % routeCombinations.length;
     };
 
-    // Cycle routes every 3 seconds
     const interval = setInterval(cycleRoutes, 3000);
 
-    // Cleanup the map and interval on component unmount
     return () => {
-      clearInterval(interval); // Clear the interval
+      clearInterval(interval);
       map.setTarget(null);
     };
   }, [routeLayer]);
 
   return (
-    <div>
-      {/* The Map */}
-      <div ref={mapElement} style={{ width: '100%', height: '400px' }} />
-      {/* The popup overlay */}
-      <div
-        ref={popupRef}
-        className="ol-popup"
-        style={{
-          display: 'none',
-          position: 'absolute',
-          backgroundColor: 'white',
-          padding: '10px 15px',
-          border: '1px solid #ccc',
-          borderRadius: '6px',
-          fontSize: '10px',
-          lineHeight: '1.5',
-          textAlign: 'left',
-          zIndex: 1000,
-          boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
-        }}
-      >
-        {/* Inject HTML content */}
+    <div className="map-component">
+      <div ref={mapElement} className="map-container" />
+      <div ref={popupRef} className="ol-popup">
         <div dangerouslySetInnerHTML={{ __html: popupContent }} />
       </div>
 
-
-      {/* The source marker element */}
-      <div
-        ref={sourceMarkerRef}
-        style={{
-          position: 'absolute',
-          transform: 'rotate(0deg)',
-        }}
-      >
-        🏠 {/* Home emoji as the source marker */}
+      <div ref={sourceMarkerRef} className="marker source-marker">
+        🏠
       </div>
 
-      {/* The nearby friend marker elements */}
       {nearbyFriendCoordinates.map((_, index) => (
         <div
           key={index}
           ref={nearbyFriendMarkerRefs.current[index]}
-          style={{
-            position: 'absolute',
-            transform: 'rotate(0deg)',
-            cursor: 'pointer',
-          }}
+          className="marker friend-marker"
         >
-          👤 {/* Friend emoji as the nearby friend marker */}
+          👤
         </div>
       ))}
 
-      {/* The destination marker element */}
-      <div
-        ref={destinationMarkerRef}
-        style={{
-          position: 'absolute',
-          transform: 'rotate(0deg)',
-          cursor: 'pointer',
-        }}
-      >
-        🎯 {/* Target emoji as the destination marker */}
+      <div ref={destinationMarkerRef} className="marker destination-marker">
+        🎯
       </div>
     </div>
   );

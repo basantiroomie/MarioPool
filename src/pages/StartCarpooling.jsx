@@ -35,7 +35,7 @@ const StartCarpooling = () => {
   };
 
   return (
-    <div>
+    <div className="page-container">
       {/* Header */}
       <header>
         <h1>Start Carpooling</h1>
@@ -43,16 +43,18 @@ const StartCarpooling = () => {
       </header>
 
       {/* Show the map */}
-      <MapComponent 
-        sourceCoordinate={selectedFriend ? [selectedFriend.lon, selectedFriend.lat] : nearbyFriendCoordinates[0].coords} 
-        nearbyFriendCoordinates={nearbyFriendCoordinates} // Pass raw coordinates to MapComponent
-        destinationCoordinate={destinationCoordinate} 
-      />
+      <div className="map-wrapper">
+        <MapComponent 
+          sourceCoordinate={selectedFriend ? [selectedFriend.lon, selectedFriend.lat] : nearbyFriendCoordinates[0].coords} 
+          nearbyFriendCoordinates={nearbyFriendCoordinates} // Pass raw coordinates to MapComponent
+          destinationCoordinate={destinationCoordinate} 
+        />
+      </div>
 
       {/* Display all friends' details in tabular form */}
       <div style={{ marginTop: '20px' }}>
         <h3>Nearby Friends Details</h3>
-        <table border="1" cellPadding="10" style={{ borderCollapse: 'collapse', width: '50%' }}>
+        <table className="friend-table">
           <thead>
             <tr>
               <th>Friend</th>

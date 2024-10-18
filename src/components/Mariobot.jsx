@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 
 // Styles for the bot
 const styles = {
@@ -65,6 +65,11 @@ const ChatBot = () => {
     setMessage(""); // Clear message for new interaction
   };
 
+  const handleRating = (rating) => {
+    setMessage('Thank you for your feedback: ${rating}');
+    setSelectedOption(""); // Reset selection
+  };
+
   const handleSubmit = () => {
     if (selectedOption === "1") {
       const numOfRides = parseInt(userInput);
@@ -73,14 +78,15 @@ const ChatBot = () => {
       } else if (numOfRides < 5) {
         setMessage("That's cool, keep Mariopooling!");
       } else if (numOfRides >= 6 && numOfRides <= 15) {
-        setMessage("Go to lenskart within 5 days to avail your offer.");
+        setMessage("Congrats you have unlocked coupon code.");
       } else {
         setMessage("Congrats! Your discount coupon will be emailed to you.");
       }
     } else if (selectedOption === "2") {
       setMessage("Our team will reach out to you shortly.");
     } else if (selectedOption === "3") {
-      setMessage("Thank you for your feedback.");
+      // Rating system for previous ride experience
+      return;
     } else if (selectedOption === "4") {
       setMessage("Thank you, your suggestion is of immense value to us.");
     }
@@ -136,14 +142,13 @@ const ChatBot = () => {
               )}
               {selectedOption === "3" && (
                 <>
-                  <input
-                    style={styles.input}
-                    type="text"
-                    placeholder="Your experience (10 words)"
-                    value={userInput}
-                    onChange={(e) => setUserInput(e.target.value)}
-                  />
-                  <button style={styles.button} onClick={handleSubmit}>Submit</button>
+                  <div style={styles.dropdown}>
+                    <button onClick={() => handleRating("Very Good ⭐⭐⭐⭐⭐")}>Very Good ⭐⭐⭐⭐⭐</button>
+                    <button onClick={() => handleRating("Good ⭐⭐⭐⭐")}>Good ⭐⭐⭐⭐</button>
+                    <button onClick={() => handleRating("Okay ⭐⭐⭐")}>Okay ⭐⭐⭐</button>
+                    <button onClick={() => handleRating("Bad ⭐⭐")}>Bad ⭐⭐</button>
+                    <button onClick={() => handleRating("Very Bad ⭐")}>Very Bad ⭐</button>
+                  </div>
                 </>
               )}
               {selectedOption === "4" && (

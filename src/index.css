@@ -2,10 +2,21 @@
 body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
-  padding: 0;
+  padding: 0; /* No padding for body */
   line-height: 1.6;
   background-color: #f4f4f4;
 }
+
+/* Apply padding to the main content section */
+.main-content {
+  padding: 30px;
+}
+
+/* Ensure header and footer have no padding */
+.header, .footer {
+  padding: 0;
+}
+
 
 /* Header Styles */
 .header {
@@ -153,6 +164,69 @@ body {
   color: #6C757D;
 }
 
+/* Map container styling */
+.map-container {
+  width: 100%;
+  height: 400px;
+  position: relative; /* Ensures markers and overlays position correctly */
+  margin-top: 20px; /* Add space above the map */
+  padding: 10px; /* Add padding inside the map container */
+  background-color: #f4f4f4; /* Optional: Light background for contrast */
+  border: 2px solid #ccc; /* Optional: Border for visual separation */
+}
+
+/* Popup overlay styling */
+/* Popup overlay styling */
+.ol-popup {
+  display: none; /* Hidden by default */
+  position: absolute;
+  background-color: white;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 12px; /* Increase font size for better readability */
+  line-height: 1.5;
+  text-align: left;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Marker styling */
+.marker {
+  position: absolute;
+  transform: rotate(0deg);
+  font-size: 22px; /* Increased font size for better visibility */
+  cursor: pointer;
+  z-index: 100; /* Ensure markers are always on top */
+}
+
+
+/* Source marker styling */
+.source-marker {
+  font-size: 24px;
+  color: green;
+  padding: 5px;
+}
+
+/* Friend marker styling */
+.friend-marker {
+  font-size: 20px;
+  color: blue;
+  padding: 5px;
+}
+
+/* Destination marker styling */
+.destination-marker {
+  font-size: 24px;
+  color: red;
+  padding: 5px;
+}
+
+/* Hover effect for markers */
+.marker:hover {
+  transform: scale(1.2); /* Slightly enlarges marker on hover */
+  transition: transform 0.3s ease;
+}
 
 /* Form Styles */
 h2 {
@@ -223,6 +297,56 @@ form button:hover {
   margin-top: 10px;
   font-size: 0.9em;
   color: #ffffff;
+}
+
+/* Styling for headers and tables */
+h3 {
+  font-size: 1.6em;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+/* Dropdown */
+#selectFriend {
+  padding: 10px;
+  font-size: 1em;
+  margin-top: 20px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .page-container {
+    margin-left: 1cm;
+    margin-right: 1cm;
+  }
+}
+/* Page content wrapper */
+.page-container {
+  margin-left: 3cm;  /* Add 5 cm margin on the left */
+  margin-right: 3cm; /* Add 5 cm margin on the right */
+  padding: 20px;     /* Add 20px padding around the content */
+  background-color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.section-spacing {
+  margin: 20px 0; /* Adds spacing between sections of the page */
 }
 
 /* Media Queries */
@@ -372,3 +496,185 @@ form button:hover {
     color: #647361; /* Change color on hover */
   }
 
+.subscription-container {
+  text-align: center;
+  padding: 40px 0; /* Adjust padding as needed */
+}
+
+/* Title styling */
+.title {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 30px;
+  font-family: 'Arial', sans-serif;
+}
+
+.plans {
+  display: flex;
+  flex-direction: row;  /* Ensure the cards are laid out in a row */
+  justify-content: center; /* Horizontally center the cards */
+  align-items: flex-start; /* Align items at the top of the row */
+  gap: 20px; /* Space between cards */
+  margin-top: 20px;
+  max-width: 1200px; /* Limit the maximum width for a centered layout */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px; /* Padding for responsiveness */
+}
+
+/* Individual plan cards */
+.plan-card {
+  border: 1px solid #ccc;
+  padding: 40px 20px;
+  border-radius: 8px;
+  width: 250px; /* Set a width that fits your design */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Plan heading and price */
+/* Plan heading */
+.plan-card h2 {
+  font-size: 1.8em; /* Larger font for the heading */
+  margin-bottom: 10px; /* Space below the heading */
+  color: #444; /* Darker text color */
+  font-family: 'Arial', sans-serif;
+  text-align: center; /* Ensure the heading is centered */
+  margin-top: 0; /* Remove top margin */
+  padding-top: 10px; /* Add padding to push text down from the top */
+}
+
+/* Plan price */
+.plan-card p {
+  font-size: 1.2em; /* Slightly larger font for the price */
+  margin-top: 10px; /* Space above the price */
+  margin-bottom: 20px; /* Space below the price */
+  text-align: center; /* Center the price */
+  color: #007bff; /* Same blue color as the button */
+}
+
+
+/* Subscribe button styling */
+.subscribe-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: auto; /* Push the button to the bottom */
+}
+
+.subscribe-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Popular plan highlight */
+.popular {
+  border: 2px solid #007bff;
+  position: relative;
+}
+
+.badge {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+}
+
+/* Adjust for responsiveness */
+@media (max-width: 768px) {
+  .plans {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .plan-card {
+    width: 100%; /* Full width on smaller screens */
+    height: auto; /* Adjust height dynamically */
+  }
+}
+
+/* Toggle Switch Container */
+.availability-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Switch styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0; /* Hide the default checkbox */
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f44336; /* Red by default (Unavailable) */
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+/* Change color to green when available */
+.available .slider {
+  background-color: #4caf50; /* Green when Available */
+}
+
+.available .slider:before {
+  transform: translateX(26px); /* Move the toggle to the right */
+}
+
+.unavailable .slider:before {
+  transform: translateX(0); /* Move the toggle to the left */
+}
+
+.availability-status {
+  margin-left: 10px; /* Space between toggle and status text */
+  font-weight: bold; /* Make the status text bold */
+}
+/* Profile Dialogue Box */
+.profile-dialogue {
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 8px; /* Rounded corners */
+  padding: 80px; /* Padding inside the box */
+  margin: 20px auto; /* Center align with margin */
+  width: calc(100% - 4cm); /* 3cm padding on each side */
+  max-width: 600px; /* Max width for larger screens */
+  background-color: #fff; /* Background color of the dialogue */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+}

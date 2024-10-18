@@ -8,6 +8,8 @@ import RegisterLogin from './pages/RegisterLogin'; // Import the Layout componen
 import Login from './pages/Login'; 
 import ChatBot from './components/Mariobot.jsx'; // Adjust the path as necessary
 import About from './pages/About'; 
+import Subscription from './pages/Subscription'; 
+import Profile from './pages/Profile';
 
 
 function App() {
@@ -20,7 +22,9 @@ function App() {
           <Route path="/startcarpooling" element={<StartCarpooling />} />
           <Route path="/RegisterLogin" element={<RegisterLogin />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/About" element={<About />} /> 
+          <Route path="/About" element={<About />} />
+          <Route path="/Subscription" element={<Subscription />} />
+          <Route path="/profile" element={<Profile />} /> 
         </Route>
       </Routes>
       <ChatBot /> {/* Make sure this is included */}

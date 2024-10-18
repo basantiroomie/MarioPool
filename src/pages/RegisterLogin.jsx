@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import 'ol/ol.css'; // Import OpenLayers CSS
 import Map from 'ol/Map';
@@ -6,6 +5,8 @@ import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
 import { fromLonLat } from 'ol/proj'; // To transform coordinates
+import { useNavigate } from 'react-router-dom';
+
 const RegisterLogin = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -26,6 +27,9 @@ const RegisterLogin = () => {
   const [mapInitialized, setMapInitialized] = useState(false);
   const mapElement = useRef(null);
   const [map, setMap] = useState(null);
+  const [submittedData, setSubmittedData] = useState(null);
+  const navigate = useNavigate();
+
   // Predefined company locations
   const companyCoordinates = {
     'Samsung - Electronic City': { lat: 12.841, lon: 77.663 },
@@ -44,6 +48,30 @@ const RegisterLogin = () => {
     'Wipro - Electronic City': { lat: 12.842, lon: 77.667 },
     'Wipro - Whitefield': { lat: 12.979, lon: 77.748 },
   };
+
+  useEffect(() => {
+    // Check for existing profile data in localStorage when the component mounts
+    const savedProfileData = JSON.parse(localStorage.getItem('profileData'));
+    if (savedProfileData) {
+      setFormData(savedProfileData.formData);
+      setLat(savedProfileData.lat);
+      setLon(savedProfileData.lon);
+      setCompanyLat(savedProfileData.companyLat);
+      setCompanyLon(savedProfileData.companyLon);
+    }
+  }, []);
+
+  // Store formData and coordinates in localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('profileData', JSON.stringify({
+      formData,
+      lat,
+      lon,
+      companyLat,
+      companyLon,
+    }));
+  }, [formData, lat, lon, companyLat, companyLon]); // Trigger when any of these change
+
   // Function to fetch coordinates from pincode
   const getCoordinatesFromPincode = async (enteredPincode) => {
     try {
@@ -64,6 +92,7 @@ const RegisterLogin = () => {
     }
     return null;
   };
+
   // Handle input changes for all form fields
   const handleChange = (e) => {
     setFormData({
@@ -71,6 +100,7 @@ const RegisterLogin = () => {
       [e.target.name]: e.target.value,
     });
   };
+
   // Handle pincode change and fetch coordinates
   const handlePincodeChange = async (e) => {
     const pincode = e.target.value;
@@ -86,6 +116,7 @@ const RegisterLogin = () => {
       }
     }
   };
+
   // Handle company selection and update map with company's lat/lon
   const handleCompanyChange = (e) => {
     const selectedCompany = e.target.value;
@@ -100,6 +131,7 @@ const RegisterLogin = () => {
       view.setZoom(14); // Zoom closer to the company location
     }
   };
+
   // Initialize the map when coordinates are available
   useEffect(() => {
     if (lat && lon && !mapInitialized) {
@@ -120,33 +152,35 @@ const RegisterLogin = () => {
     }
   }, [lat, lon, mapInitialized]);
 
-    // Function to handle form submission
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      const finalData = {
-        ...formData,
-        lat, // From map coordinates
-        lon, // From map coordinates
-        companyLat,
-        companyLon,
-      };
-
-      try {
-        const response = await fetch('http://localhost:5000/save-csv', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(finalData),
-        });
-
-        const result = await response.json();
-        alert(result.message);
-      } catch (error) {
-        console.error('Error saving data:', error);
-      }
+    const finalData = {
+      ...formData,
+      lat, // From map coordinates
+      lon, // From map coordinates
+      companyLat,
+      companyLon,
     };
+
+    try {
+      const response = await fetch('http://localhost:5000/save-csv', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(finalData),
+      });
+
+      const result = await response.json();
+      alert(result.message);
+      setSubmittedData(finalData);
+      navigate('/Profile', { state: { registeredData: finalData } });
+    } catch (error) {
+      console.error('Error saving data:', error);
+    }
+  };
 
   return (
     <div>
@@ -212,7 +246,7 @@ const RegisterLogin = () => {
         <input
           type="text"
           name="flatNumber"
-          placeholder="Flat No./House No."
+          placeholder="Flat Number"
           value={formData.flatNumber}
           onChange={handleChange}
         />
@@ -224,31 +258,21 @@ const RegisterLogin = () => {
           onChange={handleChange}
         />
         <input
-          type="number"
+          type="text"
           name="pincode"
           placeholder="Pincode"
           value={formData.pincode}
           onChange={handlePincodeChange}
         />
-        {/* Show the map only if lat and lon are available */}
-        {lat && lon && (
-          <div style={{ marginTop: '20px' }}>
-            <h3>Your location based on the pincode:</h3>
-            <div ref={mapElement} style={{ width: '100%', height: '300px' }} />
-          </div>
-        )}
-        {/* Adding bold "Destination" above the select element */}
-        <label style={{ fontWeight: 'bold', display: 'block', marginTop: '10px' }}>
-          Destination
+        <label style={{ marginTop: '10px', display: 'block' }}>
+          Select Company
         </label>
         <select
           name="company"
-          onChange={handleCompanyChange}
           value={formData.company}
+          onChange={handleCompanyChange}
         >
-          <option disabled value="">
-            Choose your company
-          </option>
+          <option value="">Select</option>
           {Object.keys(companyCoordinates).map((company) => (
             <option key={company} value={company}>
               {company}
@@ -260,7 +284,18 @@ const RegisterLogin = () => {
         </label>
         <button type="submit">Register</button>
       </form>
+      <div
+        ref={mapElement}
+        style={{ width: '100%', height: '400px', marginTop: '20px' }} // Adjust height as needed
+      />
+      {submittedData && (
+        <div style={{ marginTop: '20px' }}>
+          <h3>Profile Data:</h3>
+          <pre>{JSON.stringify(submittedData, null, 2)}</pre>
+        </div>
+      )}
     </div>
   );
 };
+
 export default RegisterLogin;
