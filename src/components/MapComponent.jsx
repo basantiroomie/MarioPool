@@ -14,9 +14,9 @@ import { Stroke, Style } from 'ol/style'; // For styling the route line
 // Exporting the coordinates so they can be used in other components
 export const sourceCoordinate = [77.6200, 12.9719]; // MG Road 
 export const nearbyFriendCoordinates = [
-  { coords: [77.6300, 12.9740], name: 'John Doe', detail: 'Friend 1 details' }, // Friend 1
-  { coords: [77.6350, 12.9725], name: 'Jane Smith', detail: 'Friend 2 details' }, // Friend 2
-  { coords: [77.6380, 12.9730], name: 'Mike Johnson', detail: 'Friend 3 details' }, // Friend 3
+  { coords: [77.6300, 12.9740], name: 'Friend 1', age: '23', gender: 'female' }, // Friend 1
+  { coords: [77.6350, 12.9725], name: 'Friend 2', age: '25', gender: 'female' }, // Friend 2
+  { coords: [77.6380, 12.9730], name: 'Friend 3', age: '20', gender: 'male' }, // Friend 3
 ];
 export const destinationCoordinate = [77.6836, 12.8391]; // Ensure this is accurate
 
@@ -66,15 +66,20 @@ const MapComponent = () => {
     // Create the popup overlay
     const popupOverlay = new Overlay({
       element: popupRef.current,
-      positioning: 'bottom-center',
+      positioning: 'top-center',
       stopEvent: false,
-      offset: [20, -20], // Position the popup slightly above the marker
+      offset: [0, -20], // Position the popup slightly above the marker
     });
     map.addOverlay(popupOverlay);
 
-    // Function to show popup
-    const showPopup = (content, position) => {
-      setPopupContent(content); // Set the popup content
+    // Function to show popup with friend details (name, age, and gender)
+    const showPopup = (friend, position) => {
+      const content = `
+        <strong>${friend.name}</strong><br />
+        <strong>Age:</strong> ${friend.age}<br />
+        <strong>Gender:</strong> ${friend.gender}`;
+      
+      setPopupContent(content); // Set the popup content as HTML string
       popupOverlay.setPosition(fromLonLat(position)); // Set popup position
       popupRef.current.style.display = 'block'; // Show the popup
     };
@@ -103,7 +108,7 @@ const MapComponent = () => {
 
       // Add hover event listener for each friend marker
       nearbyFriendMarkerRefs.current[index].current.addEventListener('mouseenter', () => {
-        showPopup(`${friend.name}: ${friend.detail}`, friend.coords);
+        showPopup(friend, friend.coords); // Pass the entire friend object
       });
       nearbyFriendMarkerRefs.current[index].current.addEventListener('mouseleave', hidePopup);
     });
@@ -118,7 +123,7 @@ const MapComponent = () => {
 
     // Add hover event listener for the destination marker
     destinationMarkerRef.current.addEventListener('mouseenter', () => {
-      showPopup('Destination: Electronic City', destinationCoordinate);
+      showPopup({ name: 'Destination', age: 'N/A', gender: 'N/A' }, destinationCoordinate);
     });
     destinationMarkerRef.current.addEventListener('mouseleave', hidePopup);
 
@@ -177,7 +182,6 @@ const MapComponent = () => {
     <div>
       {/* The Map */}
       <div ref={mapElement} style={{ width: '100%', height: '400px' }} />
-
       {/* The popup overlay */}
       <div
         ref={popupRef}
@@ -186,15 +190,20 @@ const MapComponent = () => {
           display: 'none',
           position: 'absolute',
           backgroundColor: 'white',
-          padding: '5px 10px',
+          padding: '10px 15px',
           border: '1px solid #ccc',
-          borderRadius: '4px',
-          fontSize: '12px', // Decreased font size
+          borderRadius: '6px',
+          fontSize: '10px',
+          lineHeight: '1.5',
+          textAlign: 'left',
           zIndex: 1000,
+          boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
         }}
       >
-        {popupContent}
+        {/* Inject HTML content */}
+        <div dangerouslySetInnerHTML={{ __html: popupContent }} />
       </div>
+
 
       {/* The source marker element */}
       <div

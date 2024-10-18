@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import MapComponent, { nearbyFriendCoordinates, destinationCoordinate } from '../components/MapComponent'; // Import the map component and coordinates
 
 const StartCarpooling = () => {
-  // Transform nearbyFriendCoordinates into objects with lat/lon for display purposes
+  // Transform nearbyFriendCoordinates into objects with lat/lon, age, and gender for display purposes
   const nearbyFriends = nearbyFriendCoordinates.map((friend, index) => ({
     name: `Friend ${index + 1}`, // Assign names (Friend 1, Friend 2, etc.)
     lat: friend.coords[1],  // Latitude is the second element
     lon: friend.coords[0],  // Longitude is the first element
-    detail: friend.detail,  // Include friend details
+    age: friend.age,
+    gender: friend.gender,
   }));
 
   // State for the selected friend
@@ -55,14 +56,16 @@ const StartCarpooling = () => {
           <thead>
             <tr>
               <th>Friend</th>
-              <th>Details</th>
+              <th>Age</th>
+              <th>Gender</th>
             </tr>
           </thead>
           <tbody>
             {nearbyFriends.map((friend, index) => (
               <tr key={index}>
                 <td>{friend.name}</td>
-                <td>{friend.detail}</td>
+                <td>{friend.age}</td>
+                <td>{friend.gender}</td>
               </tr>
             ))}
           </tbody>
