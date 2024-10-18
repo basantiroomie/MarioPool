@@ -38,7 +38,7 @@ const FindaRide = () => {
     <div>
       {/* Header */}
       <header>
-        <h1>Start Carpooling</h1>
+        <h1>Find A Ride</h1>
         <p>Find your friends and start carpooling together!</p>
       </header>
 

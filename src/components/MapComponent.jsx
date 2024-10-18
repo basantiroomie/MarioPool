@@ -68,7 +68,7 @@ const MapComponent = () => {
       element: popupRef.current,
       positioning: 'top-center',
       stopEvent: false,
-      offset: [0, -20], // Position the popup slightly above the marker
+      offset: [20, -20], // Position the popup slightly above the marker
     });
     map.addOverlay(popupOverlay);
 
