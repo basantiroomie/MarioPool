@@ -4,7 +4,7 @@ Create a virtual carpooling network for employees of large companies or organiza
 ## Key Features
 - Provide carpooling services to company's employees.​
 - Companies are going to subscribe our website for their customers.​
-- Achieve dynamic location tracking. ​
+- Static location tracking. ​
 - Provide simple and effective carpooling services.​
 - Easy to use UI.​
 - User friendly Bot.
