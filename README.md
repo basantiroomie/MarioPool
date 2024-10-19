@@ -10,7 +10,7 @@ Currently, two official plugins are available:
 
 A brief description of your project.
 
-## Prerequisites
+## Steps to Run
 
 Before you begin, ensure you have met the following requirements:
 
@@ -20,3 +20,8 @@ Before you begin, ensure you have met the following requirements:
 - **npm**: Node.js comes with npm (Node Package Manager) installed. You can verify the installation by running:
   ```bash
   npm run dev
+
+#Vite error 
+```bash
+npm install vite --save-dev
+
