@@ -1,11 +1,6 @@
-# React + Vite
+# MarioPool
+Create a virtual carpooling network for employees of large companies or organizations, where the system matches employees with similar commuting routes and schedules, facilitates carpool arrangements, and provides incentives such as preferential parking or toll discounts to promote carpooling and reduce solo commuting. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## Steps to Run
 - **Navigate to path**
