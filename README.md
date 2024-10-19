@@ -21,7 +21,7 @@ cd /path/to/MarioPool
   ```bash
   npm run dev
 
-# Incase Vite error 
+## Incase Vite error 
 ```bash
 npm install vite --save-dev
 
