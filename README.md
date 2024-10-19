@@ -11,9 +11,8 @@ Create a virtual carpooling network for employees of large companies or organiza
   
 ## Steps to Run
 - **Navigate to path**
- ```bash
-cd /path/to/MarioPool
-```
+  ```bash
+  cd /path/to/MarioPool
 - **Node.js**: Make sure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
   ```bash
   node server.js
