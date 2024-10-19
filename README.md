@@ -11,6 +11,7 @@ Create a virtual carpooling network for employees of large companies or organiza
 - Provide simple and effective carpooling services.​
 - Easy to use UI.​
 - User friendly Bot.
+- Emergency Call button.
 
 ## Technologies Used
 ### Front End
