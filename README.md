@@ -19,8 +19,6 @@ Create a virtual carpooling network for employees of large companies or organiza
 - **npm**: Node.js comes with npm (Node Package Manager) installed. You can verify the installation by running:
   ```bash
   npm run dev
-
-## Incase Vite error 
-```bash
-npm install vite --save-dev
-
+- **Incase of Vite error** 
+  ```bash
+  npm install vite --save-dev
