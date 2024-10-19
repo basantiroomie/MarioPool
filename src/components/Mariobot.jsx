@@ -78,9 +78,9 @@ const ChatBot = () => {
       } else if (numOfRides < 5) {
         setMessage("That's cool, keep Mariopooling!");
       } else if (numOfRides >= 6 && numOfRides <= 15) {
-        setMessage("Congrats you have unlocked coupon code.");
+        setMessage("Congrats you have unlocked flipkart coupon code.You can avail it in profile section");
       } else {
-        setMessage("Congrats! Your discount coupon will be emailed to you.");
+        setMessage("Congrats!you have availed an offer at bigbasket which you can avail in profile section");
       }
     } else if (selectedOption === "2") {
       setMessage("Our team will reach out to you shortly.");
