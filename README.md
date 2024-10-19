@@ -15,7 +15,8 @@ A brief description of your project.
 Before you begin, ensure you have met the following requirements:
 
 - **Node.js**: Make sure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
+  ```bash
+  node server.js
 - **npm**: Node.js comes with npm (Node Package Manager) installed. You can verify the installation by running:
   ```bash
-  node -v
-  npm -v
+  npm run dev
