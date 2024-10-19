@@ -1,7 +1,15 @@
 # MarioPool
 Create a virtual carpooling network for employees of large companies or organizations, where the system matches employees with similar commuting routes and schedules, facilitates carpool arrangements, and provides incentives such as preferential parking or toll discounts to promote carpooling and reduce solo commuting. 
 
-
+## Key Features
+​
+- Provide carpooling services to company's employees.​
+- Companies are going to subscribe our website for their customers.​
+- Achieve dynamic location tracking. ​
+- Provide simple and effective carpooling services.​
+- Easy to use UI.​
+- User friendly Bot.
+  
 ## Steps to Run
 - **Navigate to path**
  ```bash
