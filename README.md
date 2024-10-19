@@ -6,14 +6,12 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# Project Name
-
-A brief description of your project.
 
 ## Steps to Run
-
-Before you begin, ensure you have met the following requirements:
-
+-path directory
+ ```bash
+cd /path to/MarioPool
+```
 - **Node.js**: Make sure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
   ```bash
   node server.js
@@ -21,7 +19,7 @@ Before you begin, ensure you have met the following requirements:
   ```bash
   npm run dev
 
-#Vite error 
+# Incase Vite error 
 ```bash
 npm install vite --save-dev
 
